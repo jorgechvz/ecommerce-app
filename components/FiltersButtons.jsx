@@ -14,7 +14,9 @@ export default function FilterButton({
   menuVisible,
   brands,
 }) {
+  // Create an animated value to manage the menu animation and set the initial value to -70
   const [menuAnimation] = useState(new Animated.Value(-70));
+  // Animate the menu visibility based on the menuVisible state variable
   useEffect(() => {
     Animated.timing(menuAnimation, {
       toValue: menuVisible ? 0 : -70,

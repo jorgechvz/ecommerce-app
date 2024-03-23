@@ -14,7 +14,7 @@ const products = data.products;
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  
+  // Return the home screen with the components in a scroll view container
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="p-2 flex-row justify-between items-center mt-3 mb-4 mx-1">

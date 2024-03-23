@@ -8,6 +8,7 @@ export default function CategoriesScreen({ navigation }) {
     a.title.localeCompare(b.title)
   );
   const products = data.products;
+  // render each category item in the flatlist
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -50,7 +51,7 @@ export default function CategoriesScreen({ navigation }) {
       </TouchableOpacity>
     );
   };
-
+  // return the flatlist with categories
   return (
     <View className="flex-1 bg-white">
       <FlatList

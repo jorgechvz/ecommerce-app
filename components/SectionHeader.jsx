@@ -7,6 +7,7 @@ export default function SectionHeader({
   navigation,
   isNested,
 }) {
+  // Function to handle the press event on the view all button
   const handlePress = () => {
     if (isNested) {
       navigation.navigate("SubCategory", navRoute);

@@ -3,9 +3,11 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function SuccessScreen({ route }) {
+  // Get the navigation object from the useNavigation hook
   const navigation = useNavigation();
+  // Get the order object from the route params
   const { order } = route.params;
-
+  // Return the success screen with the order details and a button to continue shopping
   return (
     <View className="flex-1 bg-white items-center justify-between py-10 px-6">
       <View className="flex-col items-center justify-center">

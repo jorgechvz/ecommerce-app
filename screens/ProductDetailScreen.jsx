@@ -14,13 +14,16 @@ import CheckIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { calculateDiscount } from "../utils/utils";
 
 export default function ProductDetail({ route }) {
+  // get the product id from the route params
   const { id } = route.params;
+  // find the product from the data.json file
   const product = data.products.find((product) => product.id === id);
   const images = product.images;
+  // state variables to manage the quantity, adding state, and added state
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  
+  // function to add the product to the cart
   const addToCart = async () => {
     let cart = await AsyncStorage.getItem("cart");
     cart = cart !== null ? JSON.parse(cart) : {};
@@ -36,6 +39,7 @@ export default function ProductDetail({ route }) {
     }
     await AsyncStorage.setItem("cart", JSON.stringify(cart));
   };
+  // return the product detail view
 
   return (
     <View className="flex-1 justify-between">

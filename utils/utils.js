@@ -7,7 +7,7 @@ export const capitalize = (str) => {
 export const calculateDiscount = (price, discount) => {
   return price - (price * discount) / 100;
 };
-
+// Shuffle an array in place using the Fisher-Yates algorithm
 export default function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -15,6 +15,7 @@ export default function shuffleArray(array) {
   }
 }
 
+// Get the unique values from an array
 export const images = { 
   'smartphone-cat': require("../assets/categories/smartphone-cat.webp"),
   'laptops-cat': require("../assets/categories/laptops-cat.webp"),

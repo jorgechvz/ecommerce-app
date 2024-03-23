@@ -17,7 +17,7 @@ import SuccessScreen from "../screens/SuccessScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
+// Create the navigation stack for the home screen with the categories, profile, cart, subcategory, search, and product detail screens
 function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -69,6 +69,7 @@ function HomeStack() {
     </Stack.Navigator>
   );
 }
+// Create the navigation stack for the categories screen with the subcategory and product detail screens
 function CategoriesStack() {
   return (
     <Stack.Navigator initialRouteName="Categories">
@@ -92,7 +93,7 @@ function CategoriesStack() {
     </Stack.Navigator>
   );
 }
-
+// Create the navigation stack for the cart screen with the shipping, address, payment, order details, and success screens
 function StackCart() {
   return (
     <Stack.Navigator initialRouteName="Cart">
@@ -118,7 +119,7 @@ function StackCart() {
     </Stack.Navigator>
   );
 }
-
+// Create the navigation container with the tab navigator and the home, categories, cart, and search screens
 export default function Navigation() {
   return (
     <NavigationContainer>

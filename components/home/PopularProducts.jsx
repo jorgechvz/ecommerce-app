@@ -4,8 +4,10 @@ import SectionHeader from "../SectionHeader";
 import renderItem from "../ProductBox";
 
 export default function PopularProducts({ products, navigation }) {
+  // Filter the products with a rating of 4.9 or higher and shuffle the array 
   const filteredProducts = products.filter((product) => product.rating >= 4.9);
   shuffleArray(filteredProducts);
+  // Get the first 9 products from the filtered products 
   const popularProducts = filteredProducts.slice(0, 9);
   const popularObject = {
     id: 21,

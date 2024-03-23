@@ -7,15 +7,17 @@ import { capitalize } from "../utils/utils";
 
 function SearchScreen() {
   const navigation = useNavigation();
+  // get products from data.json
   const products = data.products;
+  // state variable to manage the search text input
   const [searchText, setSearchText] = useState("");
-
+  // filter the products based on the search text input and return the flatlist with the filtered products
   const filteredProducts = searchText
     ? products.filter((product) =>
         product.title.toLowerCase().startsWith(searchText.toLowerCase())
       )
     : [];
-
+  // render each product item in the flatlist
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -40,7 +42,7 @@ function SearchScreen() {
       </TouchableOpacity>
     );
   };
-
+  // return the search screen with the search bar and the flatlist
   return (
     <View className="bg-white flex-1">
       <View className="mx-4 mt-8 mb-4 bg-white">

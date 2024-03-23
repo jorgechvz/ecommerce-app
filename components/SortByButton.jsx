@@ -9,7 +9,9 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function SortByButton({ toggleMenu, setSort, menuVisible }) {
+  // Create a new Animated.Value to manage the menu animation
   const [menuAnimation] = useState(new Animated.Value(-70));
+  // Use the useEffect hook to animate the menu based on the menu visibility
   useEffect(() => {
     Animated.timing(menuAnimation, {
       toValue: menuVisible ? 0 : -70,

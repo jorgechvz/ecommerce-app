@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Input } from "@rneui/themed";
 
 export default function AddressScreen() {
+  // States for the component to manage the addresses, checked address, selected address, modal visibility, and new address
   const navigation = useNavigation();
   const [checked, setChecked] = useState({});
   const [addressOption, setAddressOption] = useState(null);
@@ -26,21 +27,20 @@ export default function AddressScreen() {
     phone: "",
   });
 
+  // Function to remove an address from the list
   const removeAddress = async (indexToRemove) => {
     const updatedAddresses = addresses.filter(
       (address, index) => index !== indexToRemove
     );
     setAddresses(updatedAddresses);
+    // Save the updated addresses to the async storage after removing the address
     await AsyncStorage.setItem("addresses", JSON.stringify(updatedAddresses));
     if (addressOption === indexToRemove) {
       setAddressOption(null);
       setChecked({});
     }
   };
-
-  const clearShipping = async () => {
-    await AsyncStorage.removeItem("addresses");
-  };
+  // Function to handle the continue button click event
   const continueButtonHandler = async () => {
     if (addressOption !== null) {
       const selectedAddress = addresses[addressOption];
@@ -54,6 +54,7 @@ export default function AddressScreen() {
       alert("Please select an address before continuing.");
     }
   };
+  // Function to fetch the addresses and the order address from the async storage
   useEffect(() => {
     const fetchAddressesAndOrderAddress = async () => {
       const [storedAddresses, storedOrderAddress] = await Promise.all([
@@ -79,6 +80,7 @@ export default function AddressScreen() {
 
     fetchAddressesAndOrderAddress();
   }, []);
+  // Function to add a new address to the list of addresses and save it to the async storage
   const addAddress = async () => {
     if (newAddress.name && newAddress.address && newAddress.phone) {
       const updatedAddresses = [...addresses, newAddress];
@@ -90,7 +92,7 @@ export default function AddressScreen() {
       alert("Please fill all the fields");
     }
   };
-
+  // Function to select an address from the list of addresses and manage the checked state
   const selectAddress = (index) => {
     if (addressOption === index) {
       setAddressOption(null);
@@ -100,7 +102,7 @@ export default function AddressScreen() {
       setChecked({ [index]: true });
     }
   };
-
+  // Function to render the address item in the list
   function renderItem({ item, index }) {
     return (
       <>
@@ -139,7 +141,7 @@ export default function AddressScreen() {
       </>
     );
   }
-
+  // Return the JSX for the component with the list of addresses, modal for adding a new address, and the continue button
   return (
     <View className="flex-1 bg-white">
       <Modal

@@ -16,12 +16,13 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function OrderDetailsScreen() {
   const navigation = useNavigation();
+  // State variables to manage the loading state, payment details, shipping details, address details, and cart details
   const [isLoading, setIsLoading] = useState(true);
   const [paymentDetails, setPaymentDetails] = useState({});
   const [shippingDetails, setShippingDetails] = useState(null);
   const [addressDetails, setAddressDetails] = useState(null);
   const [cartDetails, setCartDetails] = useState({});
-
+  // Function to handle the confirm order button click event and remove the cart, payment details, shipping details, and address details from the async storage
   useEffect(() => {
     const fetchPaymentDetails = async () => {
       const [cart, paymentDetails, shipping, address] = await Promise.all([
@@ -47,7 +48,7 @@ export default function OrderDetailsScreen() {
 
     fetchPaymentDetails();
   }, []);
-
+  // isLoading state is true, show the loading indicator with the text "Loading ..."
   if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center bg-white">
@@ -56,7 +57,7 @@ export default function OrderDetailsScreen() {
       </View>
     );
   }
-
+  // Calculate the cart length, subtotal amount, shipping amount, tax amount, and total amount
   const cartLength = Object.keys(cartDetails).length;
   const subtotalAmount = Object.values(cartDetails)
     .reduce((acc, item) => {
@@ -89,7 +90,7 @@ export default function OrderDetailsScreen() {
 
   const cardNumber = paymentDetails.cardNumber.slice(-4);
   const maskedCardNumber = "**** " + cardNumber;
-
+  // Function to handle the confirm order button click event and remove the cart, payment details, shipping details, and address details from the async storage
   const confirmOrderButtonHandler = async () => {
     await Promise.all([
       AsyncStorage.removeItem("cart"),
@@ -104,7 +105,7 @@ export default function OrderDetailsScreen() {
       },
     });
   };
-
+  // Return the order details screen with the cart, address, shipping, and payment details
   return (
     <View className="flex-1 bg-white">
       <KeyboardAvoidingView

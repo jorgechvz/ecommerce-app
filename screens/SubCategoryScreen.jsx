@@ -12,6 +12,7 @@ import { calculateDiscount, capitalize } from "../utils/utils";
 export default function SubCategoryScreen({ route }) {
   const navigation = useNavigation();
   const { name } = route.params;
+  // Get the products based on the category name
   const getProductsBrands = data.products.filter((product) => {
     if (product.category === name) {
       return true;
@@ -24,19 +25,20 @@ export default function SubCategoryScreen({ route }) {
     }
     return false;
   });
+  // State variables to manage the sort, brand, sort menu visibility, and filter menu visibility
   const [sort, setSort] = useState(null);
   const [brand, setBrand] = useState(null);
   const [sortMenuVisible, setSortMenuVisible] = useState(false);
   const [filterMenuVisible, setFilterMenuVisible] = useState(false);
-
+  // Function to toggle the filter menu visibility
   const toggleFilterMenu = () => {
     setFilterMenuVisible(!filterMenuVisible);
   };
-
+  // Function to toggle the sort menu visibility
   const toggleSortMenu = () => {
     setSortMenuVisible(!sortMenuVisible);
   };
-
+  // Filter the products based on the category name, brand, and sort
   let products = data.products.filter((product) => {
     if (product.category === name) {
       return true;
@@ -49,9 +51,11 @@ export default function SubCategoryScreen({ route }) {
     }
     return false;
   });
+  // Filter the products based on the brand name
   if (brand) {
     products = products.filter((product) => product.brand === brand);
   }
+  // Sort the products based on the sort value
   if (sort) {
     products.sort((a, b) => {
       if (sort === "price-asc") {
@@ -69,9 +73,11 @@ export default function SubCategoryScreen({ route }) {
       return 0;
     });
   }
+  // Get the unique brands from the products
   const brands = [
     ...new Set(getProductsBrands.map((product) => product.brand)),
   ];
+  // Function to render the product item
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity

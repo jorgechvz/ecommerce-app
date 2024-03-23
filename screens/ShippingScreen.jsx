@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 export default function ShippingScreen() {
+  // State variables to manage the checked shipping option and the selected shipping option from the async storage cart details and shipping details from the async storage 
   const navigation = useNavigation();
   const [checked, setChecked] = useState({
     "Free Shipping": false,
@@ -13,7 +14,7 @@ export default function ShippingScreen() {
     "Express Shipping": false,
   });
   const [shippingOption, setShippingOption] = useState(null);
-
+  // Function to toggle the checkbox and set the selected shipping option
   const toggleCheckbox = (option) => {
     setChecked({
       "Free Shipping": false,
@@ -23,9 +24,9 @@ export default function ShippingScreen() {
     });
     setShippingOption(option);
   };
-
+  // Fetch the cart details and shipping details from the async storage
   const [cart, setCart] = useState({});
-
+ 
   useEffect(() => {
     const fetchCart = async () => {
       const storedCart = await AsyncStorage.getItem("cart");
@@ -35,7 +36,7 @@ export default function ShippingScreen() {
     };
     fetchCart();
   }, []);
-
+  // Fetch the shipping option from the async storage and set the checked state
   useEffect(() => {
     const fetchShippingOption = async () => {
       const storedShippingOption = await AsyncStorage.getItem("shipping");
@@ -52,6 +53,7 @@ export default function ShippingScreen() {
     };
     fetchShippingOption();
   }, []);
+  // Function to handle the continue button click event and navigate to the address screen
   const continueHandler = async () => {
     if (shippingOption !== null) {
       await AsyncStorage.setItem("shipping", JSON.stringify(shippingOption));
@@ -60,12 +62,14 @@ export default function ShippingScreen() {
       alert("Please select a shipping method");
     }
   };
+  // Return the shipping screen with the shipping options and the order info with the subtotal, shipping amount, and total amount
   const shippingDate = new Date();
   shippingDate.setMonth(shippingDate.getMonth() + 1);
   const standardDate = new Date();
   standardDate.setDate(standardDate.getDate() + 14);
   const expressDate = new Date();
   expressDate.setDate(expressDate.getDate() + 3);
+  // Return the shipping screen with the shipping options and the order info with the subtotal, shipping amount, and total amount
   return (
     <View className="flex-1 justify-between mb-5 bg-white">
       <View className="m-4">

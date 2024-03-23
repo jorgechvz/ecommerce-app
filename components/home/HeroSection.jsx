@@ -1,81 +1,29 @@
-/* import { Component } from "react";
-import { Dimensions, Image, View } from "react-native"
-import Carousel from "react-native-snap-carousel";
-
-const images = [
-  require("../../assets/banner-1.png"),
-  require("../../assets/banner-2.png"),
-  require("../../assets/banner-3.png"),
-];
-
-const sliderWidth = Dimensions.get("window").width;
-const itemWidth = Dimensions.get("window").width;
-
-class Hero extends Component {
-  renderItem = ({ item, index }) => {
-    return (
-      <View>
-        <Image source={item} style={{ width: "100%", height: 150 }} />
-      </View>
-    );
-  };
-
-  render() {
-    return (
-      <Carousel
-        ref={(c) => {
-          this._carousel = c;
-        }}
-        data={images}
-        renderItem={this.renderItem}
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
-        loop
-        autoplay
-      />
-    );
-  }
-}
-
-export default Hero; */
-
-/* import { Dimensions, Image, View } from "react-native";
-
-export default function HeroSection() {
-  return (
-    <View className="mt-5">
-      <Image
-        source={require("../../assets/banner-1.png")}
-        style={{ width: "100%", height: 150 }}
-      />
-    </View>
-  );
-}  */
-
 import React, { useRef, useEffect, useState } from "react";
 import { Dimensions, Image, View, FlatList } from "react-native";
-
+// images for the carousel
 const images = [
   require("../../assets/banner-1.png"),
   require("../../assets/banner-2.png"),
   require("../../assets/banner-3.png"),
 ];
-
+// window width and item height for the carousel
 const windowWidth = Dimensions.get("window").width;
 const itemHeight = 150;
-
+// Hero component with a carousel
 const Hero = () => {
+  // state variable to manage the index of the carousel
   const [index, setIndex] = useState(0);
   const carouselRef = useRef(null);
-
+  // render each image item in the flatlist
   const renderItem = ({ item }) => (
     <View>
       <Image source={item} style={{ width: windowWidth, height: itemHeight }} />
     </View>
   );
-
+  // set an interval to scroll the carousel every 7 seconds
   useEffect(() => {
     const timer = setInterval(() => {
+      // scroll to the next image in the carousel every 7 seconds using the scrollToIndex method
       setIndex((prevIndex) => {
         const nextIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
         carouselRef.current.scrollToIndex({ index: nextIndex, animated: true });

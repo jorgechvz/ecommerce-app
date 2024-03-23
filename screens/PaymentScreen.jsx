@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Input, ButtonGroup } from "@rneui/themed";
 
+// Card types and their icons and colors for the credit card
 export const cardsTypes = [
   {
     name: "visa",
@@ -44,6 +45,7 @@ export const cardsTypes = [
 
 export default function PaymentScreen() {
   const navigation = useNavigation();
+  // States for the component to manage the credit cards, checked card, selected card, modal visibility, and new card
   const [cards, setCards] = useState([]);
   const [checked, setChecked] = useState({});
 
@@ -59,7 +61,7 @@ export default function PaymentScreen() {
     expiryYear: "",
   });
   const [selectedIndex, setSelectedIndex] = useState();
-
+  // Function to remove a card from the list of cards
   const removeCard = async (indexToRemove) => {
     const updatedCards = cards.filter((card, index) => index !== indexToRemove);
     setCards(updatedCards);
@@ -69,7 +71,7 @@ export default function PaymentScreen() {
       setChecked({});
     }
   };
-
+  // Function to handle the continue button click event and save the selected card to the async storage
   const continueButtonHandler = async () => {
     if (cardOption !== null) {
       const selectedCards = cards[cardOption];
@@ -82,6 +84,7 @@ export default function PaymentScreen() {
       alert("Please select a credit card before continuing.");
     }
   };
+  // Function to fetch the cards and payment details from the async storage
   useEffect(() => {
     const fetchCardsAndPaymentDetails = async () => {
       const [storedCards, storedPaymentDetails] = await Promise.all([
@@ -106,7 +109,7 @@ export default function PaymentScreen() {
 
     fetchCardsAndPaymentDetails();
   }, []);
-
+  // Function to add a new card to the list of cards
   const addCard = async () => {
     if (
       newCard.cardType &&
@@ -132,7 +135,7 @@ export default function PaymentScreen() {
       alert("Please fill all the fields");
     }
   };
-
+  // Function to select a card from the list of cards and manage the checked state
   const selectCard = (index) => {
     if (cardOption === index) {
       setCardOption(null);
@@ -142,7 +145,7 @@ export default function PaymentScreen() {
       setChecked({ [index]: true });
     }
   };
-
+  // Function to render each card item in the flatlist
   function renderItem({ item, index }) {
     const cardTypeObject = cardsTypes.find(
       (cardType) => cardType.name === item.cardType
@@ -197,7 +200,7 @@ export default function PaymentScreen() {
       </>
     );
   }
-
+  // Return the JSX for the component with the list of cards, modal for adding a new card, and the continue button
   return (
     <View className="flex-1 bg-white">
       <Modal

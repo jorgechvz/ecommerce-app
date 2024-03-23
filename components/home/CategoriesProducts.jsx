@@ -5,7 +5,9 @@ import SectionHeader from "../SectionHeader";
 const categories = data.categories;
 
 export default function CategoriesProducts({ navigation }) {
+  // Get the first four categories from the data
   const category = categories.slice(0, 4);
+  // Render each category item in the flatlist
   const renderItem = ({ item }) => (
     <TouchableOpacity
       className="flex-1 p-3 m-1 bg-gray-200 rounded-md"
