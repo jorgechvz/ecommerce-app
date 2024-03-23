@@ -13,7 +13,7 @@ My purpose in embarking on this project is twofold. Firstly, I seek to expand my
 
 For a detailed demonstration of the app and a walkthrough of the code, please check out the YouTube video linked below.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[E-commerce App with React Native Demo](https://youtu.be/tW31rz2bkLs)
 
 # Development Environment
 
